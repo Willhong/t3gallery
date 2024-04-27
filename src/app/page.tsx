@@ -1,7 +1,7 @@
-import { index } from "drizzle-orm/mysql-core";
-import Link from "next/link";
+import { headers } from "next/headers";
 import { db } from "~/server/db";
 
+export const dynamic = "force-dynamic";
 const mockUrls = [
   "https://utfs.io/f/760d5e8f-97a5-450f-b1fe-be33890fc4d2-vaolmp.png",
   "https://utfs.io/f/bf48cc8e-311a-47b2-8c6d-17d059c9b28a-vaojfi.png",
@@ -14,6 +14,7 @@ const mockImages = mockUrls.map((url, index) => ({
 }));
 
 export default async function HomePage() {
+  headers();
   const posts = await db.query.posts.findMany();
   console.log(posts);
 
