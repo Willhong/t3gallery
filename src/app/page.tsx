@@ -1,5 +1,6 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import { headers } from "next/headers";
+import Image from "next/image";
 import { db } from "~/server/db";
 import { getMyImages } from "~/server/queries";
 
@@ -11,8 +12,14 @@ async function Images() {
   return (
     <div className="flex flex-wrap gap-4">
       {images.map((image) => (
-        <div key={image.id} className="h-48 w-48">
-          <img src={image.url} />
+        <div key={image.id} className="h-48 w-48 justify-center">
+          <Image
+            src={image.url}
+            style={{ objectFit: "contain" }}
+            width={192}
+            height={192}
+            alt={image.name}
+          />
           <div>{image.name}</div>
         </div>
       ))}
